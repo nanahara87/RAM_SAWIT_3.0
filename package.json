@@ -1,0 +1,57 @@
+{
+  "name": "ram-sawit-professional",
+  "version": "3.0.0",
+  "description": "Aplikasi RAM Sawit: offline-first, localhost/LAN, dan server online",
+  "main": "main.js",
+  "author": "RAM Sawit",
+  "license": "UNLICENSED",
+  "private": true,
+  "scripts": {
+    "start": "electron .",
+    "server": "node server.js",
+    "test": "node --test",
+    "build:win": "electron-builder --win nsis portable --x64"
+  },
+  "devDependencies": {
+    "electron": "^39.0.0",
+    "electron-builder": "^26.0.12"
+  },
+  "build": {
+    "appId": "id.ramsawit.desktop",
+    "productName": "RAM Sawit",
+    "asar": true,
+    "compression": "maximum",
+    "directories": {
+      "output": "dist",
+      "buildResources": "public/assets"
+    },
+    "files": [
+      "main.js",
+      "server.js",
+      "server-core.js",
+      "package.json",
+      "public/**/*",
+      "README.md"
+    ],
+    "win": {
+      "icon": "public/assets/ram-sawit.ico",
+      "target": [
+        { "target": "nsis", "arch": ["x64"] },
+        { "target": "portable", "arch": ["x64"] }
+      ],
+      "artifactName": "RAM-Sawit-${version}-${target}-${arch}.${ext}"
+    },
+    "nsis": {
+      "oneClick": false,
+      "perMachine": false,
+      "allowElevation": true,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "RAM Sawit"
+    },
+    "portable": {
+      "artifactName": "RAM-Sawit-${version}-Portable-${arch}.${ext}"
+    }
+  }
+}

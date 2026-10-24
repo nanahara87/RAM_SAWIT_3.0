@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#174d36">
+  <meta name="description" content="RAM Sawit — sistem informasi transaksi pembelian, penjualan, pengeluaran, laporan, dan sinkronisasi data.">
+  <title>RAM Sawit | Sistem Informasi Usaha</title>
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="assets/ram-sawit.ico">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar" id="sidebar">
+      <div class="brand">
+        <div class="brand-mark"><img id="sidebarLogo" src="assets/logo-default.png" alt="Logo RAM Sawit"></div>
+        <div class="brand-copy"><strong id="sidebarBusinessName">RAM Sawit</strong><span>Sistem Informasi Usaha</span></div>
+      </div>
+      <div class="branch-card"><span class="status-dot"></span><div><strong id="modeLabel">Mode lokal</strong><small id="modeSub">Data tersimpan pada perangkat</small></div></div>
+      <nav class="nav-list" aria-label="Navigasi utama">
+        <div class="nav-caption">MENU UTAMA</div>
+        <button class="nav-item active" data-view="dashboard"><span class="nav-icon">▦</span><span>Dashboard</span></button>
+        <button class="nav-item" data-view="pembelian"><span class="nav-icon">↓</span><span>Pembelian TBS</span></button>
+        <button class="nav-item" data-view="penjualan"><span class="nav-icon">↑</span><span>Penjualan</span></button>
+        <button class="nav-item" data-view="pengeluaran"><span class="nav-icon">−</span><span>Pengeluaran</span></button>
+        <div class="nav-caption">ANALISIS & SISTEM</div>
+        <button class="nav-item" data-view="laporan"><span class="nav-icon">▤</span><span>Laporan & Rekap</span></button>
+        <button class="nav-item" data-view="pengaturan"><span class="nav-icon">⚙</span><span>Pengaturan</span></button>
+      </nav>
+      <div class="sidebar-bottom">
+        <div class="secure-note"><span class="secure-icon">✓</span><div><strong>Penyimpanan lokal</strong><small>Transaksi tetap tersimpan saat offline.</small></div></div>
+        <div class="sidebar-version">RAM Sawit Desktop <span>v3.0.0</span></div>
+      </div>
+    </aside>
+
+    <main class="main-area">
+      <header class="topbar">
+        <div class="topbar-left"><button class="icon-button mobile-menu" id="mobileMenu" aria-label="Buka menu">☰</button><div><div class="crumb">SISTEM INFORMASI <span>/</span> <b id="breadcrumb">Dashboard</b></div><h1 id="pageTitle">Dashboard</h1></div></div>
+        <div class="topbar-right"><div class="connection-pill" id="connectionPill"><span class="status-dot"></span><span id="connectionLabel">Offline siap</span></div><button class="icon-button" id="backupQuick" title="Unduh cadangan data" aria-label="Unduh cadangan">⇩</button><div class="user-chip"><div class="user-avatar">RS</div><div><strong>Operator RAM</strong><small id="todayLabel">—</small></div></div></div>
+      </header>
+      <section class="content" id="appContent" aria-live="polite"></section>
+      <footer class="app-footer"><span>© <span id="yearLabel"></span> RAM Sawit · Data operasional</span><span id="footerConnection">Mode lokal / offline tersedia</span></footer>
+    </main>
+  </div>
+  <div class="sidebar-scrim" id="sidebarScrim"></div>
+
+  <div class="toast-stack" id="toastStack" aria-live="polite"></div>
+  <input type="file" id="restoreInput" accept="application/json,.json" hidden>
+  <input type="file" id="logoInput" accept="image/png,image/jpeg,image/webp" hidden>
+
+  <div class="auth-layer hidden" id="authLayer">
+    <section class="auth-card">
+      <div class="auth-logo"><img src="assets/logo-default.png" alt="Logo RAM Sawit"></div>
+      <div class="eyebrow">KEAMANAN DATA</div>
+      <h2 id="authTitle">Hubungkan server</h2>
+      <p class="auth-description" id="authDescription">Buat akun administrator untuk melindungi data pada server bersama.</p>
+      <form id="authForm">
+        <label id="authUserLabel" for="authUsername">Nama pengguna</label>
+        <input id="authUsername" autocomplete="username" minlength="3" maxlength="48" required placeholder="admin">
+        <label for="authPassword">Kata sandi</label>
+        <input id="authPassword" type="password" autocomplete="current-password" minlength="8" required placeholder="Minimal 8 karakter">
+        <div id="authConfirmWrap"><label for="authConfirm">Ulangi kata sandi</label><input id="authConfirm" type="password" autocomplete="new-password" minlength="8" placeholder="Ulangi kata sandi"></div>
+        <div class="auth-error" id="authError"></div>
+        <button class="button primary full" id="authSubmit" type="submit">Buat akun administrator</button>
+      </form>
+      <button class="text-button" id="continueLocal">Lanjutkan hanya dengan data lokal</button>
+      <p class="fineprint">Kredensial disimpan sebagai hash kata sandi. Simpan kata sandi administrator dengan aman.</p>
+    </section>
+  </div>
+
+  <div class="modal-layer hidden" id="modalLayer"><div class="modal-card" id="modalCard" role="dialog" aria-modal="true" aria-labelledby="modalTitle"></div></div>
+  <script src="app.js" defer></script>
+</body>
+</html>
